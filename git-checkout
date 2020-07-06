@@ -1,0 +1,15 @@
+#!/bin/sh
+
+branchName=$1
+
+# Check if params are enough to go ahead.
+if [[ -z $branchName ]];then
+  echo "ERROR: Please provide the branch name." 1>&2 && exit 1
+fi
+
+#Check if the user.initials is set up.
+if [[ -z $(git config user.initials) ]];then
+  echo "ERROR: Please set up the user.initials (git config --global user.initials "[INITIALS]")." 1>&2 && exit 1
+fi
+
+git checkout -b "$(git config user.initials)_$branchName"
